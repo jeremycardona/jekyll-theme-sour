@@ -1,0 +1,178 @@
+---
+layout: default
+title: "Sour Theme - Coding in the Digital Age"
+description: "A cyberpunk-themed blog exploring cutting-edge web development, coding tutorials, and futuristic technologies."
+---
+
+<!-- Hero Section - Main banner/introduction area -->
+<section class="py-16 text-center">
+  <h1 class="text-4xl md:text-6xl font-bold mb-6 text-primary [text-shadow:0_0_10px_currentColor]">
+    Sour Theme
+  </h1>
+  <p class="text-lg md:text-xl text-base-content/80 max-w-3xl mx-auto leading-relaxed mb-12">
+    Exploring the intersection of <span class="text-accent">code</span>, 
+    <span class="text-secondary">creativity</span>, and 
+    <span class="text-primary">cyberpunk aesthetics</span> in modern web development.
+  </p>
+
+  <!-- Technology Stack Icons - Visual representation of blog topics -->
+  <div class="flex justify-center gap-8 flex-wrap">
+    <div class="flex flex-col items-center group cursor-pointer p-4">
+      <div class="w-12 h-12 rounded-full bg-primary/20 flex items-center justify-center mb-2 group-hover:bg-primary/30 transition-colors">
+        <svg class="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"/>
+        </svg>
+      </div>
+      <span class="text-sm text-base-content/80">Frontend</span>
+    </div>
+    <div class="flex flex-col items-center group cursor-pointer p-4">
+      <div class="w-12 h-12 rounded-full bg-secondary/20 flex items-center justify-center mb-2 group-hover:bg-secondary/30 transition-colors">
+        <svg class="w-6 h-6 text-secondary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14M5 12l4-4m-4 4l4 4"/>
+        </svg>
+      </div>
+      <span class="text-sm text-base-content/80">Backend</span>
+    </div>
+    <div class="flex flex-col items-center group cursor-pointer p-4">
+      <div class="w-12 h-12 rounded-full bg-accent/20 flex items-center justify-center mb-2 group-hover:bg-accent/30 transition-colors">
+        <svg class="w-6 h-6 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z"/>
+        </svg>
+      </div>
+      <span class="text-sm text-base-content/80">DevOps</span>
+    </div>
+    <div class="flex flex-col items-center group cursor-pointer p-4">
+      <div class="w-12 h-12 rounded-full bg-primary/20 flex items-center justify-center mb-2 group-hover:bg-primary/30 transition-colors">
+        <svg class="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+        </svg>
+      </div>
+      <span class="text-sm text-base-content/80">Performance</span>
+    </div>
+  </div>
+</section>
+
+<!-- Featured Article Section - Highlights the latest or most important post -->
+{% assign featured_post = site.posts.first %}
+{% if featured_post %}
+<section class="mb-16">
+  <h2 class="text-2xl font-bold text-accent mb-8 [text-shadow:0_0_10px_currentColor]">Featured Article</h2>
+  
+  <div class="card bg-base-200 border border-primary/30 shadow-[0_0_20px_rgba(0,255,255,0.5)] hover:shadow-[0_0_30px_rgba(0,255,255,0.8)] transition-all duration-300">
+    <div class="card-body p-8">
+      <article>
+        <header class="mb-6">
+          <h3 class="card-title text-2xl font-bold mb-4 text-white">
+            <a href="{{ featured_post.url | relative_url }}" class="hover:text-accent transition-colors">
+              {{ featured_post.title }}
+            </a>
+          </h3>
+          
+          <div class="flex flex-wrap items-center gap-4 text-sm text-base-content/60 mb-4">
+            <div class="flex items-center gap-1">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+              </svg>
+              <span>{{ featured_post.date | date: "%-m/%-d/%Y" }}</span>
+            </div>
+            <div class="flex items-center gap-1">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
+              </svg>
+              <span>{{ featured_post.content | strip_html | number_of_words | divided_by: 200 | plus: 1 }} min read</span>
+            </div>
+            {% if featured_post.author %}<span>by {{ featured_post.author }}</span>{% endif %}
+          </div>
+          
+          {% if featured_post.tags %}
+          <div class="flex flex-wrap gap-2 mb-4">
+            {% for tag in featured_post.tags limit:4 %}
+              <span class="badge badge-accent badge-sm">{{ tag }}</span>
+            {% endfor %}
+          </div>
+          {% endif %}
+        </header>
+
+        <p class="text-base-content/80 mb-6 leading-relaxed">
+          {{ featured_post.excerpt | strip_html | truncatewords: 30 }}
+        </p>
+
+        <a href="{{ featured_post.url | relative_url }}" class="btn btn-primary btn-outline group">
+          <span>Read Full Article</span>
+          <svg class="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+          </svg>
+        </a>
+      </article>
+    </div>
+  </div>
+</section>
+{% endif %}
+
+<!-- Recent Posts Grid - Displays latest blog posts in a responsive grid -->
+<section class="mb-16">
+  <div class="flex items-center justify-between mb-8">
+    <h2 class="text-2xl font-bold text-accent [text-shadow:0_0_10px_currentColor]">Recent Posts</h2>
+    <a href="{{ '/posts' | relative_url }}" class="btn btn-primary btn-outline btn-sm group">
+      <span>View All Posts</span>
+      <svg class="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+      </svg>
+    </a>
+  </div>
+
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+    {% for post in site.posts limit:3 %}
+      <div class="card bg-base-200 border border-primary/30 hover:shadow-[0_0_20px_rgba(0,255,255,0.5)] transition-all duration-300">
+        <div class="card-body p-6">
+          <h3 class="card-title text-lg font-bold mb-3 text-white line-clamp-3">
+            <a href="{{ post.url | relative_url }}" class="hover:text-accent transition-colors">
+              {{ post.title }}
+            </a>
+          </h3>
+          
+          <div class="flex items-center gap-4 text-sm text-base-content/60 mb-3">
+            <div class="flex items-center gap-1">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+              </svg>
+              <span>{{ post.date | date: "%-m/%-d/%Y" }}</span>
+            </div>
+            <div class="flex items-center gap-1">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
+              </svg>
+              <span>{{ post.content | strip_html | number_of_words | divided_by: 200 | plus: 1 }} min read</span>
+            </div>
+          </div>
+
+          <p class="text-base-content/80 mb-4 text-sm line-clamp-3">
+            {{ post.excerpt | strip_html | truncatewords: 20 }}
+          </p>
+
+          {% if post.tags %}
+          <div class="flex flex-wrap gap-1 mb-4">
+            {% for tag in post.tags limit:3 %}
+              <span class="badge badge-secondary badge-sm">{{ tag }}</span>
+            {% endfor %}
+            {% if post.tags.size > 3 %}
+              <span class="text-xs text-base-content/60">+{{ post.tags.size | minus: 3 }} more</span>
+            {% endif %}
+          </div>
+          {% endif %}
+
+          <a href="{{ post.url | relative_url }}" class="btn btn-primary btn-outline btn-sm group">
+            <span>Read More</span>
+            <svg class="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+            </svg>
+          </a>
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+</section>
+
+
+
+{{ content }}

@@ -1,0 +1,74 @@
+@import "tailwindcss";
+@plugin "daisyui" {
+  themes: cyberpunk --default;
+  logs: true;
+};
+
+/* DaisyUI cyberpunk theme enhancements */
+:root {
+  /* Custom properties for additional cyberpunk effects */
+  --glow-primary: 0 0 20px hsl(var(--p));
+  --glow-secondary: 0 0 20px hsl(var(--s));
+}
+
+/* Simple post content styling */
+.post-content {
+  @apply text-base leading-relaxed max-w-none;
+}
+
+.post-content h1 {
+  @apply text-4xl font-bold mb-6 mt-8;
+  color: hsl(var(--p));
+}
+
+.post-content h2 {
+  @apply text-3xl font-bold mb-4 mt-6;
+  color: hsl(var(--p));
+}
+
+.post-content h3 {
+  @apply text-2xl font-bold mb-3 mt-5;
+  color: hsl(var(--s));
+}
+
+.post-content p {
+  @apply mb-4;
+  color: hsl(var(--bc));
+}
+
+.post-content ul,
+.post-content ol {
+  @apply mb-4 ml-6;
+  color: hsl(var(--bc));
+}
+
+.post-content li {
+  @apply mb-2;
+}
+
+.post-content a {
+  @apply underline hover:no-underline;
+  color: hsl(var(--p));
+}
+
+.post-content a:hover {
+  color: hsl(var(--s));
+}
+
+.post-content code {
+  @apply px-2 py-1 rounded text-sm font-mono;
+  background: hsl(var(--b2));
+  color: hsl(var(--a));
+}
+
+.post-content pre {
+  @apply p-4 rounded mb-4 overflow-x-auto border;
+  background: hsl(var(--b2));
+  border-color: hsl(var(--p) / 0.2);
+}
+
+.post-content blockquote {
+  @apply pl-4 italic mb-4;
+  border-left: 4px solid hsl(var(--s));
+  color: hsl(var(--bc) / 0.8);
+}

@@ -1,0 +1,174 @@
+<!-- Desktop Search Results Dropdown -->
+<div id="search-dropdown" class="dropdown-content menu bg-base-100 rounded-box z-[999] w-full max-w-2xl p-2 shadow-xl border border-base-300 hidden fixed top-20 left-1/2 transform -translate-x-1/2">
+  <div id="desktop-search-results" class="space-y-2 max-h-96 overflow-y-auto">
+    <div id="desktop-search-placeholder" class="text-center text-base-content/60 py-4">
+      <p class="text-sm">Start typing to search...</p>
+    </div>
+  </div>
+</div>
+
+<!-- Search Script -->
+<script src="https://unpkg.com/lunr/lunr.js"></script>
+<script>
+(function() {
+  let searchIndex = null;
+  let documents = [];
+  let isIndexReady = false;
+
+  // Load search index
+  fetch('{{ "/search.json" | relative_url }}')
+    .then(response => response.json())
+    .then(data => {
+      documents = data;
+      
+      // Build lunr index
+      searchIndex = lunr(function () {
+        this.ref('id');
+        this.field('title', { boost: 10 });
+        this.field('content');
+        this.field('excerpt', { boost: 5 });
+        this.field('categories');
+        this.field('tags');
+        
+        documents.forEach(doc => {
+          this.add(doc);
+        });
+      });
+      
+      isIndexReady = true;
+    })
+    .catch(error => {
+      console.error('Error loading search index:', error);
+    });
+
+  // Highlight search terms
+  function highlightText(text, query) {
+    if (!text || !query || !query.trim()) return text || '';
+    
+    const terms = query.toLowerCase().split(/\s+/).filter(term => term.length > 0);
+    let highlightedText = text.toString();
+    
+    terms.forEach(term => {
+      const regex = new RegExp(`(${term.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')})`, 'gi');
+      highlightedText = highlightedText.replace(regex, '<mark class="bg-primary/30 text-primary-content font-medium">$1</mark>');
+    });
+    
+    return highlightedText;
+  }
+
+  // Desktop search functions
+  function performDesktopSearch(query) {
+    if (!isIndexReady || !query.trim()) {
+      hideDesktopResults();
+      return;
+    }
+
+    try {
+      const results = searchIndex.search(query);
+      displayDesktopResults(results, query);
+    } catch (error) {
+      console.error('Search error:', error);
+      hideDesktopResults();
+    }
+  }
+
+  function displayDesktopResults(results, query) {
+    const dropdown = document.getElementById('search-dropdown');
+    const resultsContainer = document.getElementById('desktop-search-results');
+    const placeholder = document.getElementById('desktop-search-placeholder');
+    
+    placeholder.style.display = 'none';
+    dropdown.classList.remove('hidden');
+    
+    if (results.length === 0) {
+      resultsContainer.innerHTML = `
+        <div class="text-center text-base-content/60 py-4">
+          <p class="text-sm">No results found.</p>
+        </div>
+      `;
+      return;
+    }
+
+    const resultsHTML = results.slice(0, 5).map(result => {
+      const doc = documents.find(d => d.id.toString() === result.ref);
+      if (!doc) return '';
+      
+      const highlightedTitle = highlightText(doc.title, query);
+      
+      return `
+        <li>
+          <a href="${doc.url}" class="text-sm hover:bg-base-200 transition-colors">
+            <div class="flex flex-col">
+              <span class="font-medium text-base-content">${highlightedTitle}</span>
+              <span class="text-xs text-base-content/70">${doc.date || ''}</span>
+            </div>
+          </a>
+        </li>
+      `;
+    }).join('');
+    
+    resultsContainer.innerHTML = resultsHTML;
+  }
+
+  function hideDesktopResults() {
+    const dropdown = document.getElementById('search-dropdown');
+    const placeholder = document.getElementById('desktop-search-placeholder');
+    
+    if (dropdown) dropdown.classList.add('hidden');
+    if (placeholder) placeholder.style.display = 'block';
+  }
+
+  // Event listeners
+  document.addEventListener('DOMContentLoaded', function() {
+    const navbarSearch = document.getElementById('navbar-search');
+    const searchDropdown = document.getElementById('search-dropdown');
+    
+    if (!navbarSearch) {
+      console.error('navbar-search element not found');
+      return;
+    }
+    
+    // Desktop search (navbar)
+    let desktopSearchTimeout;
+    navbarSearch.addEventListener('input', function() {
+      clearTimeout(desktopSearchTimeout);
+      desktopSearchTimeout = setTimeout(() => {
+        performDesktopSearch(this.value);
+      }, 300);
+    });
+
+    navbarSearch.addEventListener('focus', function() {
+      if (this.value.trim()) {
+        performDesktopSearch(this.value);
+      }
+    });
+
+    navbarSearch.addEventListener('keypress', function(e) {
+      if (e.key === 'Enter') {
+        e.preventDefault();
+        const dropdown = document.getElementById('search-dropdown');
+        const firstLink = dropdown.querySelector('a');
+        if (firstLink) {
+          firstLink.click();
+        }
+      }
+    });
+
+    // Hide dropdown when clicking outside
+    document.addEventListener('click', function(e) {
+      const searchContainer = navbarSearch.closest('.navbar-center');
+      if (!searchContainer.contains(e.target)) {
+        hideDesktopResults();
+      }
+    });
+
+    // Keyboard shortcut (Cmd/Ctrl + K)
+    document.addEventListener('keydown', function(e) {
+      if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
+        e.preventDefault();
+        navbarSearch.focus();
+      }
+    });
+  });
+})();
+</script>

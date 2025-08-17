@@ -102,3 +102,4 @@ exclude:
   - src/
   - Makefile
   - README.md
+  - _config_dev.yml

@@ -33,7 +33,8 @@
   "scripts": {
     "build:css": "tailwindcss -i ./src/input.css -o ./assets/css/main.css --minify",
     "watch:css": "tailwindcss -i ./src/input.css -o ./assets/css/main.css --watch",
-    "dev": "concurrently \"npm run watch:css\" \"bundle exec jekyll serve --livereload\"",
+    "dev": "concurrently \"npm run watch:css\" \"bundle exec jekyll serve --livereload --config _config.yml,_config_dev.yml\"",
+    "dev-no-reload": "concurrently \"npm run watch:css\" \"bundle exec jekyll serve --config _config.yml,_config_dev.yml\"",
     "build": "npm run build:css && bundle exec jekyll build",
     "clean": "bundle exec jekyll clean && rm -f ./assets/css/main.css"
   },

@@ -32,7 +32,7 @@ jobs:
         ruby-version: '3.1.5'
         bundler-cache: true
 
-    -name: Install bundler
+    - name: Install bundler
       run: gem install bundler
         
     - name: Setup Node.js

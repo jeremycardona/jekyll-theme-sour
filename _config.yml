@@ -21,12 +21,10 @@
 title: Sour Theme
 email: jeremy.cardona@hotmail.com
 description: >- # this means to ignore newlines until "baseurl:"
-  A cyberpunk-themed blog exploring cutting-edge web development, coding tutorials, 
-  and futuristic technologies. Dive into the digital realm of code, creativity, and cyberpunk aesthetics.
-
-baseurl: "" # the subpath of your site, e.g. /blog
-url: "" # the base hostname & protocol for your site, e.g. http://example.com
-twitter_username: cyberdevblog
+  A template for a responsive and SEO-friendly Jekyll theme built with TailwindCSS and DaisyUI components. 
+baseurl: "/jekyll-theme-sour" # the subpath of your site, e.g. /blog
+url: "https://jeremycardona.github.io" # the base hostname & protocol for your site, e.g. http://example.com
+# twitter_username: cyberdevblog
 github_username: jeremycardona
 author: Sour Theme
 

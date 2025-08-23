@@ -10,8 +10,6 @@ description: "Learn how to use Jekyll plugins like jekyll-toc, jekyll-youtube, j
 toc: true
 ---
 
-# Jekyll Plugin Showcase - Template Examples
-
 This post demonstrates all the Jekyll plugins included in the Sour theme. Use this as a reference guide and template for your own posts.
 
 ## Table of Contents Plugin

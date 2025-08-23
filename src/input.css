@@ -1,6 +1,6 @@
 @import "tailwindcss";
 @plugin "daisyui" {
-  themes: cyberpunk --default;
+  themes: dark, cyberpunk --default;
   logs: true;
 };
 
@@ -65,10 +65,64 @@
   @apply p-4 rounded mb-4 overflow-x-auto border;
   background: hsl(var(--b2));
   border-color: hsl(var(--p) / 0.2);
+  max-width: 100%;
+}
+
+/* Ensure tables are responsive */
+.post-content table {
+  @apply w-full mb-4 border-collapse;
+  display: block;
+  overflow-x: auto;
+  white-space: nowrap;
+}
+
+.post-content table thead,
+.post-content table tbody,
+.post-content table tr {
+  display: table;
+  table-layout: fixed;
+  width: 100%;
+}
+
+/* Fix iframe responsiveness */
+.post-content iframe {
+  @apply max-w-full;
 }
 
 .post-content blockquote {
   @apply pl-4 italic mb-4;
   border-left: 4px solid hsl(var(--s));
   color: hsl(var(--bc) / 0.8);
+}
+
+/* Table of Contents styling */
+.toc-content ul {
+  @apply list-none ml-0;
+}
+
+.toc-content li {
+  @apply mb-1;
+}
+
+.toc-content a {
+  @apply block py-1 px-3 rounded hover:bg-base-300 transition-colors no-underline text-sm;
+  color: hsl(var(--bc) / 0.8);
+}
+
+.toc-content a:hover {
+  color: hsl(var(--p));
+  background: hsl(var(--b3));
+}
+
+.toc-content > ul > li > a {
+  @apply font-medium;
+}
+
+.toc-content ul ul {
+  @apply ml-4;
+}
+
+.toc-content ul ul a {
+  @apply text-xs;
+  color: hsl(var(--bc) / 0.6);
 }

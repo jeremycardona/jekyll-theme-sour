@@ -10,8 +10,6 @@ description: "Step-by-step tutorial for deploying Jekyll sites with npm dependen
 toc: true
 ---
 
-# Deploy Sour Theme to GitHub Pages with GitHub Actions
-
 GitHub Pages is an excellent free hosting solution for Jekyll blogs, but the Sour theme requires special setup due to its npm dependencies and TailwindCSS build process. This guide walks you through deploying your blog with GitHub Actions.
 
 ## Why GitHub Actions is Required

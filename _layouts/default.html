@@ -92,6 +92,12 @@
         </a></li>
       </ul>
 
+      <!-- Theme Toggle Button -->
+      <button id="theme-toggle" class="btn btn-ghost btn-circle" title="Toggle theme">
+        <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 718.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/>
+        </svg>
+      </button>
     </div>
   </div>
 
@@ -190,6 +196,76 @@
       </p>
     </aside>
   </footer>
+
+  <!-- Theme Toggle Script -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const themeToggle = document.getElementById('theme-toggle');
+      const htmlElement = document.documentElement;
+      
+      if (!themeToggle) {
+        console.error('Theme toggle button not found!');
+        return;
+      }
+      
+      // Theme names available in DaisyUI
+      const themes = ['dark', 'cyberpunk'];
+      let currentThemeIndex = 1; // Start with cyberpunk as default
+      
+      // Load saved theme or default to cyberpunk
+      const savedTheme = localStorage.getItem('theme') || 'cyberpunk';
+      currentThemeIndex = themes.indexOf(savedTheme);
+      if (currentThemeIndex === -1) currentThemeIndex = 1; // Default to cyberpunk (index 1)
+      
+      console.log('Initial theme:', themes[currentThemeIndex]);
+      
+      // Apply initial theme
+      htmlElement.setAttribute('data-theme', themes[currentThemeIndex]);
+      
+      function updateThemeIcon(theme) {
+        const icon = themeToggle.querySelector('svg');
+        if (!icon) return;
+        
+        if (theme === 'dark') {
+          // Sun icon for dark theme (shows what clicking will switch TO)
+          icon.innerHTML = '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"/>';
+        } else {
+          // Moon icon for cyberpunk theme (shows what clicking will switch TO)
+          icon.innerHTML = '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/>';
+        }
+      }
+      
+      // Theme toggle click handler
+      themeToggle.addEventListener('click', function(e) {
+        e.preventDefault();
+        console.log('Theme toggle clicked!');
+        
+        // Cycle to next theme
+        currentThemeIndex = (currentThemeIndex + 1) % themes.length;
+        const newTheme = themes[currentThemeIndex];
+        
+        console.log('Switching to theme:', newTheme);
+        
+        // Apply new theme
+        htmlElement.setAttribute('data-theme', newTheme);
+        
+        // Save to localStorage
+        try {
+          localStorage.setItem('theme', newTheme);
+        } catch (e) {
+          console.warn('Could not save theme to localStorage:', e);
+        }
+        
+        // Update button icon based on theme
+        updateThemeIcon(newTheme);
+        
+        return false;
+      });
+      
+      // Update icon based on current theme
+      updateThemeIcon(themes[currentThemeIndex]);
+    });
+  </script>
 
 </body>
 </html>

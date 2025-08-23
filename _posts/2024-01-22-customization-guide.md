@@ -10,8 +10,6 @@ description: "Complete guide to customizing the Sour Jekyll theme including colo
 toc: true
 ---
 
-# Complete Customization Guide for Sour Theme
-
 Welcome to the comprehensive customization guide for the Sour theme! This guide will walk you through every aspect of customizing your Jekyll blog to match your personal style and needs.
 
 ## Quick Start Customization

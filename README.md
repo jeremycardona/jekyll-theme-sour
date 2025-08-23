@@ -16,6 +16,8 @@ A minimal, responsive, and SEO-friendly Jekyll theme built with TailwindCSS and 
 
 ## 🚀 Quick Start
 
+📖 **For detailed setup instructions, see our [Getting Started Guide](GETTING_STARTED.md)**
+
 ### Prerequisites
 
 - Ruby 2.7+ and Bundler

@@ -135,7 +135,7 @@
 
   <!-- Main Content Area - where page content is rendered -->
   <main class="container mx-auto px-4 py-8">
-    {{ content }}
+    {{ content | markdownify }}
   </main>
 
   <!-- Search Modal - include search functionality -->

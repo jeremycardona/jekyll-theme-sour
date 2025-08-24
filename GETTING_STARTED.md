@@ -1,14 +1,31 @@
+---
+layout: guide
+title: Getting Started
+permalink: /getting-started/
+description: "A comprehensive step-by-step guide to set up your Jekyll blog using the Sour theme."
+---
 # Getting Started with Sour Theme
 
-Welcome to Sour Theme! This guide will help you set up your own Jekyll blog using this template.
+Welcome to **Sour Theme**! 🍋 This comprehensive guide will walk you through setting up your own modern Jekyll blog using this cutting-edge template.
 
-## Quick Overview
+> **What you'll learn:** How to set up, customize, and deploy a professional Jekyll blog in under 20 minutes.
 
-Sour Theme is a minimal, responsive Jekyll theme built with:
-- **Jekyll 4.4.1** - Static site generator
-- **TailwindCSS 4.x** - Utility-first CSS framework
-- **DaisyUI** - Component library with multiple themes
-- **Modern plugins** - SEO, analytics, table of contents, and more
+## 🚀 Quick Overview
+
+**Sour Theme** is a minimal, cyberpunk-inspired Jekyll theme designed for developers and content creators who want:
+
+### ✨ Core Technologies
+- **Jekyll 4.4.1** - Lightning-fast static site generator
+- **TailwindCSS 4.x** - Utility-first CSS framework with JIT compilation
+- **DaisyUI** - Beautiful component library with 25+ themes
+- **Modern Plugins** - SEO optimization, analytics, table of contents, and more
+
+### 🎯 Key Features
+- **Multi-theme Support** - Light, dark, cyberpunk, and 20+ other themes
+- **Responsive Design** - Mobile-first approach that looks great on any device
+- **SEO Optimized** - Built-in meta tags, structured data, and social media ready
+- **Developer Friendly** - Hot reloading, easy customization, GitHub Actions workflow
+- **Performance First** - Optimized builds, lazy loading, and minimal JavaScript
 
 ## Prerequisites
 

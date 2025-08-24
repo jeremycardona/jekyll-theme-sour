@@ -77,6 +77,16 @@ toc:
   min_level: 2
   max_level: 4
 
+# Comments configuration (Utterances)
+comments:
+  enabled: true
+  provider: "utterances"
+  utterances:
+    repo: "jeremycardona/jekyll-theme-sour"  # Your GitHub username/repository
+    issue-term: "pathname"                    # Use page pathname as issue title
+    theme: "preferred-color-scheme"           # Matches your site's theme switching
+    crossorigin: "anonymous"
+
 # Include _pages directory for custom pages
 include:
   - _pages
